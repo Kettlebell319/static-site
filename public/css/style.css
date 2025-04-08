@@ -1,0 +1,140 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.6;
+}
+
+.layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+.sidebar {
+    width: 300px;
+    padding: 20px;
+    background: #fff;
+    border-right: 1px solid #eee;
+}
+
+.main-content {
+    flex: 1;
+    padding: 40px;
+    max-width: 800px;
+}
+
+.blog-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.profile-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.search-box {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.search-box input {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ddd;
+}
+
+.search-box button {
+    padding: 8px 15px;
+    background: #333;
+    color: white;
+    border: none;
+}
+
+.email-signup {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.email-signup input {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ddd;
+}
+
+.email-signup button {
+    padding: 8px 15px;
+    background: #ff6b00;
+    color: white;
+    border: none;
+}
+
+.terms-links {
+    font-size: 0.8em;
+}
+
+.terms-links a {
+    color: #666;
+    text-decoration: none;
+    margin-right: 5px;
+}
+
+h2 {
+    font-size: 1.2em;
+    margin-top: 30px;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+ul li {
+    margin-bottom: 8px;
+}
+
+ul li a {
+    color: #333;
+    text-decoration: none;
+}
+
+.post-meta {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+.social-links a {
+    margin-right: 15px;
+    color: #333;
+    text-decoration: none;
+}
+
+nav {
+    background: #f4f4f4;
+    padding: 1rem;
+    margin-bottom: 2rem;
+    border-radius: 4px;
+}
+
+nav a {
+    color: #333;
+    text-decoration: none;
+    margin-right: 1rem;
+}
+
+nav a:hover {
+    color: #0066cc;
+}
+
+h1, h2, h3 {
+    color: #222;
+}
+
+.blog-post {
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #eee;
+} 

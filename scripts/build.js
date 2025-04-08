@@ -9,12 +9,12 @@ const OUTPUT_DIR = path.join(__dirname, '../dist');
 // Create clean dist directory
 fs.emptyDirSync(OUTPUT_DIR);
 
-// Copy static assets
-fs.copySync(path.join(SOURCE_DIR, 'public'), OUTPUT_DIR);
+// Copy static assets including index.html
+fs.copySync(path.join(__dirname, '../public'), OUTPUT_DIR);
 
-// Read base template
+// Read base HTML file
 const template = fs.readFileSync(
-  path.join(SOURCE_DIR, 'templates/base.html'),
+  path.join(OUTPUT_DIR, 'index.html'),
   'utf-8'
 );
 
@@ -35,15 +35,24 @@ function processMarkdown(filePath) {
 function buildPages() {
   const contentDir = path.join(SOURCE_DIR, 'content');
   
+  if (!fs.existsSync(contentDir)) {
+    fs.ensureDirSync(contentDir);
+    return;
+  }
+  
   fs.readdirSync(contentDir).forEach(file => {
     if (file.endsWith('.md')) {
       const filePath = path.join(contentDir, file);
       const data = processMarkdown(filePath);
       
-      // Replace template variables
-      let pageHtml = template
-        .replace('{{title}}', data.title)
-        .replace('{{content}}', data.content);
+      // Replace content in the #content div
+      let pageHtml = template.replace(
+        '<div id="content"><!-- Content will be inserted here --></div>',
+        `<div id="content">${data.content}</div>`
+      );
+      
+      // Update title
+      pageHtml = pageHtml.replace(/<title>.*?<\/title>/, `<title>${data.title}</title>`);
       
       // Generate output path
       const outputPath = path.join(
@@ -78,10 +87,14 @@ function buildBlog() {
         slug: file.replace('.md', '')
       });
       
-      // Generate individual post page
-      let postHtml = template
-        .replace('{{title}}', data.title)
-        .replace('{{content}}', data.content);
+      // Replace content in the #content div
+      let postHtml = template.replace(
+        '<div id="content"><!-- Content will be inserted here --></div>',
+        `<div id="content">${data.content}</div>`
+      );
+      
+      // Update title
+      postHtml = postHtml.replace(/<title>.*?<\/title>/, `<title>${data.title}</title>`);
       
       fs.outputFileSync(
         path.join(postsDir, file.replace('.md', '.html')),

@@ -1,10 +1,26 @@
-# Welcome to My Website
+---
+title: Welcome to My Site
+---
 
-This is a simple, fast, and modern website built with HTML, CSS, and JavaScript.
+# Welcome!
+
+This is my awesome static site. Here's some test content:
+
+## Features
+- Built with Node.js
+- Uses Markdown
+- Super fast!
+- Beautifully styled
+
+## About
+This is a paragraph about my site. It supports all standard markdown features like **bold**, *italic*, and even code blocks!
 
 ## Latest Blog Posts
+- [My First Blog Post](/blog/first-post.html) - An introduction to my new site
 
-[Coming soon...]
+## Navigation
+- [About Me](/about.html) - Learn more about who I am
+- [Blog](/blog/first-post.html) - Read my latest thoughts
 
 ## Get in Touch
 

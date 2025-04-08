@@ -1,11 +1,23 @@
-# About
+---
+title: About Me
+---
 
-Hello! I'm [Your Name], and this is my website.
+# About Me
 
-## What I Do
+Hi, I'm a web developer passionate about creating fast, modern websites. I love working with:
 
-[Add your description here]
+- JavaScript
+- Node.js
+- Static Site Generators
+- Modern CSS
 
 ## My Background
 
-[Add your background here] 
+I've been coding for several years and enjoy building tools that make the web better.
+
+## Skills
+
+- Frontend Development
+- Backend Development
+- Static Site Generation
+- Performance Optimization 
