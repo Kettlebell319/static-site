@@ -3,18 +3,25 @@ const path = require('path');
 const { marked } = require('marked');
 const frontMatter = require('front-matter');
 
-const SOURCE_DIR = path.join(__dirname, '../src');
-const OUTPUT_DIR = path.join(__dirname, '../dist');
+const PUBLIC_DIR = path.join(__dirname, '../public');
+const CONTENT_DIR = path.join(__dirname, '../content');
 
-// Create clean dist directory
-fs.emptyDirSync(OUTPUT_DIR);
+// Ensure public directory exists
+fs.ensureDirSync(PUBLIC_DIR);
 
-// Copy static assets including index.html
-fs.copySync(path.join(__dirname, '../public'), OUTPUT_DIR);
+// Copy static files from public to public (no need to copy to dist anymore)
+fs.copySync(PUBLIC_DIR, PUBLIC_DIR, {
+    filter: (src) => {
+        // Skip node_modules and hidden files
+        return !src.includes('node_modules') && !path.basename(src).startsWith('.');
+    }
+});
+
+console.log('Static files copied successfully');
 
 // Read base HTML file
 const template = fs.readFileSync(
-  path.join(OUTPUT_DIR, 'index.html'),
+  path.join(PUBLIC_DIR, 'index.html'),
   'utf-8'
 );
 
@@ -33,7 +40,7 @@ function processMarkdown(filePath) {
 
 // Build pages from markdown
 function buildPages() {
-  const contentDir = path.join(SOURCE_DIR, 'content');
+  const contentDir = path.join(CONTENT_DIR, 'content');
   
   if (!fs.existsSync(contentDir)) {
     fs.ensureDirSync(contentDir);
@@ -56,7 +63,7 @@ function buildPages() {
       
       // Generate output path
       const outputPath = path.join(
-        OUTPUT_DIR,
+        PUBLIC_DIR,
         file.replace('.md', '.html')
       );
       
@@ -68,8 +75,8 @@ function buildPages() {
 
 // Build blog posts
 function buildBlog() {
-  const blogDir = path.join(SOURCE_DIR, 'content/blog');
-  const postsDir = path.join(OUTPUT_DIR, 'blog');
+  const blogDir = path.join(CONTENT_DIR, 'content/blog');
+  const postsDir = path.join(PUBLIC_DIR, 'blog');
   
   if (!fs.existsSync(blogDir)) return;
   
