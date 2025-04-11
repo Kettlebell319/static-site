@@ -2,31 +2,66 @@ const express = require('express');
 const path = require('path');
 
 const app = express();
-let PORT = process.env.PORT || 3001;
+const PORT = 8080;  // Changed to 8080
+const DIST_DIR = path.join(__dirname, '../dist');
 
-// Serve static files from public directory instead of dist
-app.use(express.static(path.join(__dirname, '../public')));
+// Verify dist directory exists
+if (!require('fs').existsSync(DIST_DIR)) {
+    console.error('Error: dist directory does not exist. Did you run npm run build first?');
+    process.exit(1);
+}
 
-// Serve index.html for all routes
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../public/index.html'));
+// Add error handling
+app.use((err, req, res, next) => {
+    console.error('Error:', err);
+    res.status(500).send('Internal Server Error');
 });
 
-// Try to start server, increment port if in use
-const startServer = () => {
-  const server = app.listen(PORT)
-    .on('error', (err) => {
-      if (err.code === 'EADDRINUSE') {
-        console.log(`Port ${PORT} is busy, trying ${PORT + 1}...`);
-        PORT += 1;
-        startServer();
-      } else {
-        console.error('Server error:', err);
-      }
-    })
-    .on('listening', () => {
-      console.log(`Server running at http://localhost:${PORT}`);
-    });
-};
+// Add request logging
+app.use((req, res, next) => {
+    console.log(`${new Date().toISOString()} - ${req.method} ${req.path}`);
+    next();
+});
 
-startServer(); 
+// Serve static files from dist directory
+app.use(express.static(DIST_DIR));
+
+// Handle all routes
+app.get('*', (req, res) => {
+    // Remove trailing slash except for root
+    const urlPath = req.path === '/' ? req.path : req.path.replace(/\/$/, '');
+    
+    console.log('Trying to serve:', urlPath);
+    
+    // Try to serve the HTML file directly
+    const htmlPath = path.join(DIST_DIR, `${urlPath}.html`);
+    console.log('Looking for HTML file at:', htmlPath);
+    
+    if (require('fs').existsSync(htmlPath)) {
+        res.sendFile(htmlPath);
+    } else {
+        // If file doesn't exist, try serving index.html from the path
+        const indexPath = path.join(DIST_DIR, urlPath, 'index.html');
+        console.log('Looking for index.html at:', indexPath);
+        
+        if (require('fs').existsSync(indexPath)) {
+            res.sendFile(indexPath);
+        } else {
+            // If that also fails, send 404
+            console.log('Both attempts failed, sending 404');
+            res.status(404).send('Not found');
+        }
+    }
+});
+
+// Start server
+app.listen(PORT, '127.0.0.1', () => {
+    console.log(`Server running at http://localhost:${PORT}`);
+    console.log('Serving files from:', DIST_DIR);
+    
+    // List what's in the dist directory
+    console.log('\nContents of dist directory:');
+    require('fs').readdirSync(DIST_DIR).forEach(file => {
+        console.log(`- ${file}`);
+    });
+}); 

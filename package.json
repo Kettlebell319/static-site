@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "Simple static site with markdown support",
   "scripts": {
-    "start": "node scripts/serve.js"
+    "build": "node scripts/build.js",
+    "serve": "node scripts/serve.js",
+    "start": "npm run build && npm run serve"
   },
   "dependencies": {
     "express": "^4.21.2",

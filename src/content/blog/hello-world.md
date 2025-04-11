@@ -1,19 +1,24 @@
 ---
 title: Hello World
-date: 2024-03-14
-description: My first blog post
+date: 2024-03-20
+template: blog
 ---
 
 # Hello World
 
-This is my first blog post. Welcome to my blog!
+Welcome to my first blog post! This is a sample post to demonstrate how markdown files are converted into blog posts.
 
-## What to Expect
+## Features
 
-I'll be writing about:
-- Web development
-- Technology
-- Personal projects
-- And more...
+- Markdown support
+- Code syntax highlighting
+- Custom templates
+- Automatic blog index generation
 
-Stay tuned for more content! 
+Here's a sample code block:
+
+```javascript
+console.log("Hello, World!");
+```
+
+Feel free to modify this post or add new ones in the `src/content/blog/` directory. 
