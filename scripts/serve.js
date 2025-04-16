@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 
 const app = express();
-const PORT = 8080;  // Changed to 8080
+const PORT = 8000;  // Changed to match Python server
 const DIST_DIR = path.join(__dirname, '../dist');
 
 // Verify dist directory exists
@@ -23,8 +23,13 @@ app.use((req, res, next) => {
     next();
 });
 
-// Serve static files from dist directory
-app.use(express.static(DIST_DIR));
+// Serve static files from dist directory with caching disabled during development
+app.use(express.static(DIST_DIR, {
+    etag: false,
+    lastModified: false,
+    maxAge: 0,
+    cacheControl: false
+}));
 
 // Handle all routes
 app.get('*', (req, res) => {

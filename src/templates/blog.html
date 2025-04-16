@@ -4,41 +4,64 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ title }}</title>
-    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
     <aside class="sidebar">
         <a href="/" class="site-title">
-            <img src="/images/profile.jpg" alt="Blog Author">
-            MY BLOG
+            <img src="/images/profile.jpg" alt="Blog Author" class="profile-image">
+            <h1>MY BLOG</h1>
         </a>
 
-        <div class="nav-section">
+        <section>
             <h2>Search</h2>
-            <input type="text" class="search-box" placeholder="Search...">
-            <div class="search-bot">Or try my new AI-powered search bot</div>
-        </div>
+            <div class="search-container">
+                <input type="text" class="search-input" placeholder="Search...">
+                <button type="submit" class="search-button">🔍</button>
+            </div>
+            <p class="search-bot">Or try my new AI-powered search bot</p>
+        </section>
 
-        <div class="nav-section">
+        <section>
             <h2>Subscribe</h2>
-            <form class="subscribe-form">
+            <div class="subscribe-container">
                 <input type="email" placeholder="me@email.com">
-                <button type="submit">Sign Up</button>
-            </form>
-            <small>Email Terms & Privacy</small>
-        </div>
+                <button class="subscribe-button">Sign Up</button>
+            </div>
+            <div class="terms-links">
+                <a href="/email">Email</a>
+                <a href="/terms">Terms</a>
+                <a href="/privacy">& Privacy</a>
+            </div>
+        </section>
 
-        <div class="nav-section">
+        <section>
+            <h2>Get the weekly digest</h2>
+            <div class="subscribe-container">
+                <input type="email" placeholder="Type your email...">
+                <button class="subscribe-button">Subscribe</button>
+            </div>
+        </section>
+
+        <section>
             <h2>Learn</h2>
             <ul>
-                <li><a href="#">Which workshop?</a></li>
+                <li><a href="#">Workshop Series</a></li>
                 <li><a href="#">Online Courses</a></li>
                 <li><a href="#">Speaking</a></li>
                 <li><a href="#">Podcast</a></li>
             </ul>
-        </div>
+        </section>
 
-        <div class="nav-section">
+        <section>
+            <h2>Connect</h2>
+            <ul>
+                <li><a href="#">News and updates</a></li>
+                <li><a href="#">Social Media</a></li>
+            </ul>
+        </section>
+
+        <section>
             <h2>Best of the blog</h2>
             <ul>
                 <li><a href="#">Story of the Week</a></li>
@@ -46,15 +69,23 @@
                 <li><a href="#">Popular Posts</a></li>
                 <li><a href="#">Archive</a></li>
             </ul>
-        </div>
+        </section>
     </aside>
 
     <main class="main-content">
         <article class="blog-post">
             <h1>{{ title }}</h1>
-            <time class="post-date" datetime="{{ date }}">{{ date }}</time>
             <div class="post-content">
                 {{ content | safe }}
+            </div>
+            <div class="post-meta">
+                <time datetime="{{ date }}">{{ date }}</time>
+                <div class="social-links">
+                    <a href="#">Facebook</a>
+                    <a href="#">Twitter</a>
+                    <a href="#">LinkedIn</a>
+                    <a href="#">Copy Link</a>
+                </div>
             </div>
         </article>
     </main>

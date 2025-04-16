@@ -66,14 +66,16 @@ body {
     margin-bottom: 10px;
 }
 
-.email-signup input {
+.email-signup input,
+.formkit-input {
     flex: 1;
     padding: 8px;
     border: 1px solid #ddd;
     border-radius: 4px 0 0 4px;
 }
 
-.email-signup button {
+.email-signup button,
+.formkit-submit {
     padding: 8px 15px;
     background: #ff6b00;
     color: white;
@@ -90,6 +92,10 @@ body {
     color: #666;
     text-decoration: none;
     margin-right: 5px;
+}
+
+h1, h2, h3 {
+    color: #222;
 }
 
 h2 {
@@ -139,10 +145,6 @@ ul li a:hover {
     color: #ff6b00;
 }
 
-h1, h2, h3 {
-    color: #222;
-}
-
 .blog-post {
     margin-bottom: 2rem;
     padding: 2rem;
@@ -166,4 +168,17 @@ nav a {
 
 nav a:hover {
     color: #0066cc;
+}
+
+/* ConvertKit Form Styles */
+.formkit-alert-error {
+    color: #dc3545;
+    margin: 10px 0;
+    font-size: 0.8em;
+}
+
+.blog-post .email-signup {
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid #eee;
 } 
